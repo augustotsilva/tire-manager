@@ -19,8 +19,7 @@ public class GlobalExceptionHandler {
                 "timestamp", LocalDateTime.now(),
                 "status", HttpStatus.NOT_FOUND.value(), // 404
                 "error", "Not Found",
-                "message", ex.getMessage(),
-                "path", ""
+                "message", ex.getMessage()
         );
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
@@ -31,10 +30,9 @@ public class GlobalExceptionHandler {
 
         Map<String, Object> body = Map.of(
                 "timestamp", LocalDateTime.now(),
-                "status", HttpStatus.BAD_REQUEST.value(), // 404
+                "status", HttpStatus.BAD_REQUEST.value(), // 400
                 "error", "Bad Request",
-                "message", ex.getMessage(),
-                "path", ""
+                "message", ex.getMessage()
         );
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }

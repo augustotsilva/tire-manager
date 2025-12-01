@@ -35,8 +35,12 @@ public class VehicleService {
     }
 
     public VehicleDTO createVehicle(final VehicleDTO vehicleDTO) {
-        Vehicle vehicle = new Vehicle();
 
+        if (vehicleRepository.existsByLicensePlate((vehicleDTO.getLicensePlate()))) {
+            throw new IllegalArgumentException("License plate already exists!");
+        }
+
+        Vehicle vehicle = new Vehicle();
         vehicle.setLicensePlate(vehicleDTO.getLicensePlate());
         vehicle.setKm(vehicleDTO.getKm());
         vehicle.setActive(vehicleDTO.isActive());
