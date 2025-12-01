@@ -6,3 +6,6 @@
 Resolvi não utilizar MapStruct nos DTOs pois seria overkill.
 
 Cada número de fogo é único, sem duplicados.
+
+Collection do Postman nos arquivos do projeto
+

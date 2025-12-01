@@ -1,0 +1,91 @@
+{
+  "info": {
+    "_postman_id": "afad246e-bf3b-444b-a5b2-2cc6313a461b",
+    "name": "PrologApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12812326"
+  },
+  "item": [
+    {
+      "name": "GetVehicleByLicensePlate",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{ENDPOINT}}/v1/vehicle/ABC1A23",
+          "host": [
+            "{{ENDPOINT}}"
+          ],
+          "path": [
+            "v1",
+            "vehicle",
+            "ABC1A23"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "InsertNewVehicle",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"licensePlate\": \"XYZ9012\",\r\n  \"brand\": \"FIAT\",\r\n  \"km\": 15000.5,\r\n  \"isActive\": true,\r\n  \"tirePositions\": [\r\n    {\r\n      \"identifier\": \"FL\",\r\n      \"hasTire\": false\r\n    },\r\n    {\r\n      \"identifier\": \"FR\",\r\n      \"hasTire\": false\r\n    },\r\n    {\r\n      \"identifier\": \"RL\",\r\n      \"hasTire\": false\r\n    },\r\n    {\r\n      \"identifier\": \"RR\",\r\n      \"hasTire\": false\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{ENDPOINT}}/v1/vehicle",
+          "host": [
+            "{{ENDPOINT}}"
+          ],
+          "path": [
+            "v1",
+            "vehicle"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AllocateTire",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"fireNumber\": 1005,\r\n  \"licensePlate\": \"ABC1A23\",\r\n  \"tirePositionIdentifier\": \"C\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{ENDPOINT}}/v1/tire/allocate",
+          "host": [
+            "{{ENDPOINT}}"
+          ],
+          "path": [
+            "v1",
+            "tire",
+            "allocate"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "ENDPOINT",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
