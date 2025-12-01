@@ -7,3 +7,5 @@
 Resolvi não utilizar MapStruct nos DTOs pois seria overkill.
 
 Cada número de fogo é único, sem duplicados.
+
+Há uma collection do postman nos arquivos do projeto para ser importada, com os endpoints implementados.
