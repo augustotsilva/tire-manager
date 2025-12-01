@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Tire {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "fire_number", unique = true, nullable = false)

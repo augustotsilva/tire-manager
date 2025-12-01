@@ -11,4 +11,5 @@ public class TireDTO {
     private Integer fireNumber;
     private TireBrandEnum brand;
     private Integer psiPressure;
+    private boolean isAllocated;
 }

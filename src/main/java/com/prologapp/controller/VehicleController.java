@@ -3,10 +3,7 @@ package com.prologapp.controller;
 import com.prologapp.service.VehicleService;
 import com.prologapp.service.dto.VehicleDTO;
 import com.prologapp.service.dto.VehicleNoTiresDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,10 @@ public class VehicleController {
     @GetMapping("/{plate}")
     public VehicleDTO getVehicleByLicensePlate(@PathVariable String plate) {
         return vehicleService.getVehicleByLicensePlate(plate);
+    }
+
+    @PostMapping
+    public VehicleDTO createVehicle(@RequestBody VehicleDTO vehicleDTO) {
+        return vehicleService.createVehicle(vehicleDTO);
     }
 }
