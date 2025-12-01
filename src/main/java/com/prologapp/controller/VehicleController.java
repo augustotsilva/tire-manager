@@ -1,7 +1,8 @@
-package com.prologapp.api.controller;
+package com.prologapp.controller;
 
-import com.prologapp.api.service.VehicleService;
-import com.prologapp.domain.Vehicle;
+import com.prologapp.service.VehicleService;
+import com.prologapp.service.dto.VehicleDTO;
+import com.prologapp.service.dto.VehicleNoTiresDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,12 @@ public class VehicleController {
     }
 
     @GetMapping("/list")
-    public List<Vehicle> getAllVehicles() {
+    public List<VehicleNoTiresDTO> getAllVehicles() {
         return vehicleService.getAllVehicles();
     }
 
-    @GetMapping("/{id}")
-    public Vehicle getVehicleById(@PathVariable Integer id) {
-        return vehicleService.getVehicleById(id);
+    @GetMapping("/{plate}")
+    public VehicleDTO getVehicleByLicensePlate(@PathVariable String plate) {
+        return vehicleService.getVehicleByLicensePlate(plate);
     }
 }

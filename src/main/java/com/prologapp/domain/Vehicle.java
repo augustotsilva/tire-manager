@@ -1,18 +1,40 @@
 package com.prologapp.domain;
 
 import com.prologapp.domain.enums.VehicleBrandEnum;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
+@Entity
+@Table(name = "vehicle")
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class Vehicle {
-    private Integer id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    @Column(name = "license_plate", unique = true, nullable = false)
     private String licensePlate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "brand", nullable = false)
     private VehicleBrandEnum brand;
+
+    @Column(name = "km")
     private Double km;
+
+    @Column(name = "is_active")
     private boolean isActive;
-    private List<TirePosition> tirePositionList;
+
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TirePosition> positions;
 }
