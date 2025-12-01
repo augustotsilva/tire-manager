@@ -5,6 +5,7 @@ import com.prologapp.service.TireService;
 import com.prologapp.service.dto.TireAllocationByPlateDTO;
 import com.prologapp.service.dto.TireDTO;
 import com.prologapp.service.dto.TirePositionDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,12 +21,17 @@ public class TireController {
     }
 
     @PostMapping
-    public TireDTO createTire(@RequestBody TireDTO tireDTO) {
-        return tireService.createTire(tireDTO);
+    public ResponseEntity<TireDTO> createTire(@RequestBody TireDTO tireDTO) {
+        return ResponseEntity.ok(tireService.createTire(tireDTO));
     }
 
     @PutMapping("/allocate")
-    public TirePositionDTO allocateTire(@RequestBody TireAllocationByPlateDTO tireAllocationByPlateDTO) {
-        return tirePositionService.allocateTire(tireAllocationByPlateDTO);
+    public ResponseEntity<TirePositionDTO> allocateTire(@RequestBody TireAllocationByPlateDTO tireAllocationByPlateDTO) {
+        return ResponseEntity.ok(tirePositionService.allocateTire(tireAllocationByPlateDTO));
+    }
+
+    @PutMapping("/deallocate")
+    public ResponseEntity<TirePositionDTO> deallocateTire(@RequestBody TireAllocationByPlateDTO dto) {
+        return ResponseEntity.ok(tirePositionService.deallocateTire(dto));
     }
 }

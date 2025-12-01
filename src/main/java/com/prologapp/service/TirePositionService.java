@@ -51,4 +51,32 @@ public class TirePositionService {
 
         return tirePositionsMapper.toDto(savedPosition);
     }
+
+    @Transactional
+    public TirePositionDTO deallocateTire(TireAllocationByPlateDTO dto) {
+
+        TirePosition position = tirePositionRepository
+                .findByVehicleLicensePlateAndIdentifier(dto.getLicensePlate(), dto.getTirePositionIdentifier())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Position '" + dto.getTirePositionIdentifier() +
+                                "' not found for vehicle with plate " + dto.getLicensePlate()
+                ));
+
+        if (!position.isHasTire() || position.getTire() == null) {
+            throw new IllegalArgumentException("Position is already empty. Cannot deallocate.");
+        }
+
+        Tire tire = position.getTire();
+
+        tire.setAllocated(false);
+        tire.setPosition(null);
+        tireRepository.save(tire);
+
+        position.setTire(null);
+        position.setHasTire(false);
+
+        TirePosition savedPosition = tirePositionRepository.save(position);
+
+        return tirePositionsMapper.toDto(savedPosition);
+    }
 }
