@@ -5,6 +5,7 @@ import com.prologapp.domain.TirePosition;
 import com.prologapp.repository.TirePositionRepository;
 import com.prologapp.repository.TireRepository;
 import com.prologapp.service.dto.TireAllocationByPlateDTO;
+import com.prologapp.service.dto.TireDeallocationByPlateDTO;
 import com.prologapp.service.dto.TirePositionDTO;
 import com.prologapp.service.mapper.TirePositionsMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -53,7 +54,7 @@ public class TirePositionService {
     }
 
     @Transactional
-    public TirePositionDTO deallocateTire(TireAllocationByPlateDTO dto) {
+    public TirePositionDTO deallocateTire(TireDeallocationByPlateDTO dto) {
 
         TirePosition position = tirePositionRepository
                 .findByVehicleLicensePlateAndIdentifier(dto.getLicensePlate(), dto.getTirePositionIdentifier())

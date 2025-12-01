@@ -1,13 +1,12 @@
 -- ============================================================
 -- VEÍCULOS
 -- ============================================================
--- 🚨 Adicione a coluna ID e defina os valores manualmente
-INSERT INTO vehicle (id, license_plate, brand, km, is_active)
-VALUES (1, 'ABC1A23', 'SCANIA', 150000, TRUE),
-       (2, 'DEF4B56', 'VOLVO', 320000, TRUE),
-       (3, 'GHI7C89', 'MERCEDES', 50000, TRUE),
-       (4, 'JKL2D34', 'DAF', 420000, FALSE),
-       (5, 'MNO9E12', 'IVECO', 210000, TRUE);
+INSERT INTO vehicle (license_plate, brand, km, is_active)
+VALUES ('ABC1A23', 'SCANIA', 150000, TRUE),
+       ('DEF4B56', 'VOLVO', 320000, TRUE),
+       ('GHI7C89', 'MERCEDES_BENZ', 50000, TRUE),
+       ('JKL2D34', 'DAF', 420000, FALSE),
+       ('MNO9E12', 'IVECO', 210000, TRUE);
 
 
 
@@ -97,7 +96,6 @@ VALUES ('A', FALSE, 5, NULL),
 -- ALGUNS PNEUS JÁ ALOCADOS PARA TESTAR O ENDPOINT DE CONSULTA
 -- ============================================================
 
--- Veículo 1: ocupar posições A e B
 UPDATE tire_position
 SET tire_id  = 1001,
     has_tire = TRUE
@@ -116,7 +114,6 @@ UPDATE tire
 SET is_allocated = TRUE
 WHERE id = 1002;
 
--- Veículo 2: ocupar C e D
 UPDATE tire_position
 SET tire_id  = 2001,
     has_tire = TRUE
@@ -135,7 +132,6 @@ UPDATE tire
 SET is_allocated = TRUE
 WHERE fire_number = 2002;
 
--- Veículo 4 (inativo): ocupar apenas posição A
 UPDATE tire_position
 SET tire_id  = 3001,
     has_tire = TRUE

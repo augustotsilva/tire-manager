@@ -23,11 +23,9 @@ public class VehicleService {
     private final TirePositionsMapper tirePositionsMapper;
 
     public VehicleDTO getVehicleByLicensePlate(final String plate) {
-        Vehicle vehicle = vehicleRepository.findVehicleByLicensePlate(plate);
-        if (vehicle == null) {
-            throw new EntityNotFoundException("Vehicle with plate " + plate + " not found");
-        }
-        return vehicleMapper.toDto(vehicle);
+        return vehicleRepository.findVehicleByLicensePlate(plate)
+                .map(vehicleMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("Vehicle with plate " + plate + " not found"));
     }
 
     public List<VehicleNoTiresDTO> getAllVehicles() {

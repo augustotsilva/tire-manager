@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,7 +55,7 @@ class VehicleServiceTest {
         Vehicle mockVehicle = createMockVehicle(plate);
         VehicleDTO expectedDTO = createMockVehicleDTO(plate);
 
-        when(vehicleRepository.findVehicleByLicensePlate(plate)).thenReturn(mockVehicle);
+        when(vehicleRepository.findVehicleByLicensePlate(plate)).thenReturn(Optional.of(mockVehicle));
         when(vehicleMapper.toDto(mockVehicle)).thenReturn(expectedDTO);
 
         VehicleDTO result = vehicleService.getVehicleByLicensePlate(plate);
@@ -68,7 +69,7 @@ class VehicleServiceTest {
     void getVehicleByLicensePlate_notFound_throwsEntityNotFoundException() {
         String plate = "XYZ9999";
 
-        when(vehicleRepository.findVehicleByLicensePlate(plate)).thenReturn(null);
+        when(vehicleRepository.findVehicleByLicensePlate(plate)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> vehicleService.getVehicleByLicensePlate(plate));
         verify(vehicleRepository).findVehicleByLicensePlate(plate);

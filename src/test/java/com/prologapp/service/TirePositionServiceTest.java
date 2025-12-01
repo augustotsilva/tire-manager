@@ -5,6 +5,7 @@ import com.prologapp.domain.TirePosition;
 import com.prologapp.repository.TirePositionRepository;
 import com.prologapp.repository.TireRepository;
 import com.prologapp.service.dto.TireAllocationByPlateDTO;
+import com.prologapp.service.dto.TireDeallocationByPlateDTO;
 import com.prologapp.service.dto.TirePositionDTO;
 import com.prologapp.service.mapper.TirePositionsMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -36,6 +37,10 @@ class TirePositionServiceTest {
 
     private TireAllocationByPlateDTO createMockAllocationDTO(Integer fireNumber, String plate, String identifier) {
         return new TireAllocationByPlateDTO(fireNumber, plate, identifier);
+    }
+
+    private TireDeallocationByPlateDTO createMockDeallocationDTO(String plate, String identifier) {
+        return new TireDeallocationByPlateDTO(plate, identifier);
     }
 
     private TirePosition createMockTirePosition(boolean hasTire, Tire tire) {
@@ -77,7 +82,7 @@ class TirePositionServiceTest {
 
     @Test
     void allocateTire_PositionNotFound_throwsEntityNotFoundException() {
-        TireAllocationByPlateDTO dto = createMockAllocationDTO(1001, "XYZ9876", "RR");
+        TireAllocationByPlateDTO dto = createMockAllocationDTO(1002, "XYZ9876", "RR");
 
         when(tirePositionRepository.findByVehicleLicensePlateAndIdentifier(dto.getLicensePlate(), dto.getTirePositionIdentifier()))
                 .thenReturn(Optional.empty());
@@ -130,7 +135,7 @@ class TirePositionServiceTest {
 
     @Test
     void deallocateTire_successfully() {
-        TireAllocationByPlateDTO dto = createMockAllocationDTO(1001, "ABC1234", "FL");
+        TireDeallocationByPlateDTO dto = createMockDeallocationDTO("ABC1234", "FL");
         Tire mockTire = createMockTire(true);
         TirePosition mockPosition = createMockTirePosition(true, mockTire);
         TirePosition savedPosition = new TirePosition(); // Posição desalocada
@@ -154,7 +159,7 @@ class TirePositionServiceTest {
 
     @Test
     void deallocateTire_PositionNotFound_throwsEntityNotFoundException() {
-        TireAllocationByPlateDTO dto = createMockAllocationDTO(null, "XYZ9876", "RR");
+        TireDeallocationByPlateDTO dto = createMockDeallocationDTO("XYZ9876", "RR");
 
         when(tirePositionRepository.findByVehicleLicensePlateAndIdentifier(dto.getLicensePlate(), dto.getTirePositionIdentifier()))
                 .thenReturn(Optional.empty());
@@ -165,7 +170,7 @@ class TirePositionServiceTest {
 
     @Test
     void deallocateTire_PositionAlreadyEmpty_throwsIllegalArgumentException() {
-        TireAllocationByPlateDTO dto = createMockAllocationDTO(null, "ABC1234", "FL");
+        TireDeallocationByPlateDTO dto = createMockDeallocationDTO("ABC1234", "FL");
         TirePosition mockPosition = createMockTirePosition(false, null); // Posição vazia
 
         when(tirePositionRepository.findByVehicleLicensePlateAndIdentifier(dto.getLicensePlate(), dto.getTirePositionIdentifier()))

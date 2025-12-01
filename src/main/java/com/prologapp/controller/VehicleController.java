@@ -18,7 +18,7 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @GetMapping("/list")
+    @GetMapping()
     public ResponseEntity<List<VehicleNoTiresDTO>> getAllVehicles() {
         return ResponseEntity.ok(vehicleService.getAllVehicles());
     }

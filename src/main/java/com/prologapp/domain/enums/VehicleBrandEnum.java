@@ -3,7 +3,7 @@ package com.prologapp.domain.enums;
 public enum VehicleBrandEnum {
     VOLVO,
     SCANIA,
-    MERCEDES,
+    MERCEDES_BENZ,
     IVECO,
     DAF,
     MAN,

@@ -1,11 +1,9 @@
 package com.prologapp;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@EnableAutoConfiguration
-@ComponentScan(basePackages = "com.prologapp")
+@SpringBootApplication
 public class TireManagerApplication {
     public static void main(String[] args) {
         SpringApplication.run(TireManagerApplication.class, args);
