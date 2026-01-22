@@ -1,6 +1,8 @@
 # tire-manager
 
-Certifique-se que o docker está rodando na máquina.
+Gerenciador de pneus de caminhão.
+
+Para rodar, certifique-se que o docker está rodando na máquina.
 
 Comandos:
 
